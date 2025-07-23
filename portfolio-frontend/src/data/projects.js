@@ -1,24 +1,41 @@
 const projects = [
   {
-    id: 1,
-    name: "Mendora - Mental Wellness Platform",
-    image: '/projects/mendora.png',
-    description: "A full-stack mental wellness platform with guided meditations, journaling, and AI-powered sentiment analysis.",
-    stack: ["React", "Node.js", "MongoDB", "Express", "Tailwind", "OpenAI"],
-    github: "https://github.com/adarsh/mendora",
-    demo: "https://mendora.vercel.app",
-    tags: ["MERN", "AI", "Health"],
+    title: 'SkyCast',
+    description:
+      'A cartoon-styled weather app using OpenWeather API, built with React and TailwindCSS.',
+    image: '/assets/weather.jpg',
+    stack: ['React', 'Tailwind', 'API'],
+    live: '',
+    code: '',
   },
   {
-    id: 2,
-    name: "GreenX Pest Control",
-    image: '/projects/greenx.png',
-    description: "Professional business website built for a pest control company with service listings and enquiry form.",
-    stack: ["HTML", "CSS", "JavaScript", "EJS", "Express"],
-    github: "https://github.com/adarsh/greenx",
-    demo: "https://www.greenxpcs.com",
-    tags: ["Full-stack", "ClientProject"]
-  }
+    title: 'TalkBit',
+    description:
+      'A real-time chat app built with MERN stack & Socket.io featuring user auth and chat persistence.',
+    image: '/assets/chat.jpg',
+    stack: ['MERN', 'Socket.io', 'Realtime'],
+    live: '',
+    code: '',
+  },
+  {
+    title: 'GreenX Pest Control & Bird Netting',
+    description:
+      'A full-stack site built with EJS, Express, and MongoDB for backend CMS and user contact integration.',
+    image: '/assets/greenx.jpg',
+    stack: ['EJS', 'Express', 'MongoDB'],
+    live: 'https://www.greenxpcs.com',
+    code: '',
+  },
 ];
 
-export default projects;
+const upcoming = [
+  {
+    title: 'WorkForge - AI Job Skills Dashboard',
+    description:
+      'AI-powered dashboard for developers to map skills, get roadmaps, save jobs, and get OpenAI career insights.',
+    stack: ['MERN', 'OpenAI', 'Career'],
+    status: 'Planning in progress...',
+  },
+];
+
+export default {projects, upcoming}

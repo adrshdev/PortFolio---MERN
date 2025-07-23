@@ -1,5 +1,4 @@
 const Certifications = () => {
-
   const certifications = [
     {
       title: "Web Development Fundamentals",
@@ -11,28 +10,35 @@ const Certifications = () => {
     }
   ];
 
-  return(
-    <section id="certifications" className="py-16 bg-gray-50 dark:bg-gray-900">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-gray-800 dark:text-white mb-8 border-b-2 border-blue-500 inline-block">Certifications</h2>
-        <div className="grid md:grid-cols-1 gap-6">
+  return (
+    <section id="certifications" className="py-20 bg-gradient-to-br from-slate-900 to-blue-950 text-white">
+      <div className="container mx-auto px-6">
+        <h2 className="text-4xl font-extrabold text-blue-400 mb-10 border-b-4 border-blue-600 w-fit">
+          Certifications
+        </h2>
+        
+        <div className="grid md:grid-cols-1 gap-8">
           {certifications.map((cert, index) => (
-            <div key={index} className="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-6 transition transform hover:scale-[1.01] hover:shadow-blue-200 dark:hover:shadow-blue-900">
-              <div className="flex flex-col md:flex-row md:items-center md:gap-6">
+            <div key={index} className="bg-blue-900/50 backdrop-blur-md rounded-3xl p-8 border border-blue-700 shadow-2xl hover:shadow-blue-500/40 transition-all duration-300">
+              <div className="flex flex-col md:flex-row items-center gap-6">
                 <a href={cert.link} target="_blank" rel="noopener noreferrer" className="shrink-0">
-                  <img src={cert.badge} alt={`${cert.title} Badge`} className="w-24 h-24 object-contain hover:scale-105 transition-transform" />
+                  <img
+                    src={cert.badge}
+                    alt={`${cert.title} Badge`}
+                    className="w-28 h-28 object-contain rounded-full border-4 border-blue-500 shadow-md hover:scale-105 transition-transform duration-200"
+                  />
                 </a>
-                <div>
-                  <h3 className="text-xl font-semibold text-blue-600 dark:text-blue-400">
+                <div className="text-left">
+                  <h3 className="text-2xl font-bold text-blue-300 mb-2">
                     {cert.title}
                   </h3>
-                  <p className="text-gray-600 dark:text-gray-300 mt-1">
-                    <span className="font-medium">Issued by:</span> {cert.issuer}
+                  <p className="text-sm text-blue-200">
+                    <span className="font-semibold text-white">Issued by:</span> {cert.issuer}
                   </p>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
-                    <span className="font-medium">Date:</span> {cert.date}
+                  <p className="text-sm text-blue-200">
+                    <span className="font-semibold text-white">Date:</span> {cert.date}
                   </p>
-                  <p className="text-gray-700 dark:text-gray-200 mt-4">
+                  <p className="mt-4 text-blue-100 leading-relaxed">
                     {cert.description}
                   </p>
                 </div>
@@ -42,7 +48,7 @@ const Certifications = () => {
         </div>
       </div>
     </section>
-  )
+  );
 };
 
 export default Certifications;

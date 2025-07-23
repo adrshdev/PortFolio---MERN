@@ -1,33 +1,83 @@
 import about from '../data/about';
-import {motion} from 'framer-motion'
+import { motion } from 'framer-motion';
 
 const About = () => {
-  return(
-    <section id="about" className="min-h-screen px-6 py-20 bg-background text-foreground">
+  return (
+    <section
+      id="about"
+      className="min-h-screen px-6 py-20 bg-[#0F172A] text-white"
+    >
       <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-        <motion.div initial={{x: -50, opacity: 0}} animate={{x: 0, opacity: 1}} transition={{duration: 0.8}} className='flex justify-center'>
-          <img src={about.image} alt={about.name} className='w-72 h-72 object-cover rounded-2xl shadow-lg' />
+        {/* Profile Image */}
+        <motion.div
+          initial={{ x: -50, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="flex justify-center"
+        >
+          <div className="relative group">
+            <img
+              src={about.image}
+              alt={about.name}
+              className="w-72 h-72 object-cover rounded-3xl border-4 border-white shadow-2xl transform group-hover:scale-105 transition duration-300"
+            />
+            <div className="absolute inset-0 rounded-3xl bg-black/40 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center text-lg font-semibold text-white">
+              👋 Hello!
+            </div>
+          </div>
         </motion.div>
-        <motion.div initial={{x: 50, opacity: 0}} animate={{x: 0, opacity: 1}} transition={{duration: 0.8}}>
-          <h2 className="text-4xl font-bold mb-4">About Me</h2>
-          <p className="text-base leading-relaxed mb-4">{about.description}</p>
-          <ul className="space-y-2 text-sm">
+
+        {/* About Content */}
+        <motion.div
+          initial={{ x: 50, opacity: 0 }}
+          whileInView={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-4xl md:text-5xl font-extrabold mb-6 text-primary">
+            About Me
+          </h2>
+          <p className="text-base md:text-lg leading-relaxed mb-6 text-gray-300">
+            {about.description}
+          </p>
+
+          {/* Highlights */}
+          <ul className="space-y-3 text-sm md:text-base text-gray-200 list-inside">
             {about.highlights.map((point, i) => (
-              <li key={i} className="before:content-['🚀'] before:mr-2">{point}</li>
+              <li key={i} className="flex items-start gap-2">
+                <span className="text-xl">🚀</span>
+                <span>{point}</span>
+              </li>
             ))}
           </ul>
-          <div className="mt-6 flex flex-wrap gap-2">
+
+          {/* Skills */}
+          <div className="mt-6 flex flex-wrap gap-3">
             {about.skills.map((skill, i) => (
-              <span key={i} className='px-3 py-1 bg-primary text-black text-xs rounded-full shadow-md'>{skill}</span>
+              <span
+                key={i}
+                className="px-4 py-1 bg-white text-black text-xs rounded-full shadow hover:bg-gray-200 transition duration-200"
+              >
+                {skill}
+              </span>
             ))}
           </div>
+
+          {/* Resume Button */}
           {about.resumeUrl && (
-            <a href={about.resumeUrl} download className='inline-block mt-6 px-6 py-2 bg-primary text-white rounded-md shadow hover:bg-primary/80 transition'>Download Resume</a>
+            <a
+              href={about.resumeUrl}
+              download
+              className="inline-block mt-8 px-6 py-3 bg-primary text-white font-semibold rounded-lg shadow-md hover:bg-primary/90 transition duration-300"
+            >
+              📄 Download Resume
+            </a>
           )}
         </motion.div>
       </div>
     </section>
-  )
+  );
 };
 
 export default About;

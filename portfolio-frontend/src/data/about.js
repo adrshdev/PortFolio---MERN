@@ -1,18 +1,14 @@
 const about = {
-  name: "Adarsh Babu Jayasanker",
-  role: "Full Stack Developer (MERN)",
-  description: "I'm a self-taught and project-driven MERN Stack Developer with a passion for creating scalable web applications, rich user experiences, and clean code. My journey started with curiosity and grew into a full commitment to tech, code and constant growth.",
+  name: 'Adarsh Jayasanker',
+  image: '../../src/assets/f.jpg',
+  description: 'I’m a passionate MERN Stack developer with a mission to build beautiful, functional, and user-centered web apps...',
   highlights: [
-    "Currently building production-grade MERN apps",
-    "Daily exploring Next.js, DevOps, and architecture",
-    "Ask me about JavaScript, React or Node",
-    "Fun fact: I meditate, manifest, and code daily",
+    'Over 10+ full-stack projects completed',
+    'Clean, maintainable, and scalable code',
+    'Familiar with real-world problem solving',
   ],
-  skills: [
-    "React", "Tailwind", "Express", "MongoDB", "Node.js", "REST APIs", "JWT Auth", "Git & GitHub",
-  ],
-  resumeUrl: "",
-  image: '../../src/assets/f.jpg'
+  skills: ['React', 'Node.js', 'MongoDB', 'Express', 'Tailwind CSS', 'Framer Motion'],
+  resumeUrl: '/resume.pdf'
 };
 
 export default about;
