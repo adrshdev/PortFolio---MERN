@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 import { ExternalLink, X } from 'lucide-react';
-import mendora from '../assets/mendora.jpg';
-import weather from '../assets/weather.jpg';
-import chat from '../assets/chat.jpg';
-import greenx from '../assets/greenx.jpg';
+import mendora from '/assets/mendora.jpg';
+import weather from '/assets/weather.jpg';
+import chat from '/assets/chat.jpg';
+import greenx from '/assets/greenx.jpg';
 import { useState } from 'react';
 
 const projects = [

@@ -5,7 +5,7 @@ const Certifications = () => {
       issuer: "IBM SkillsBuild",
       date: "April 23, 2025",
       description: "Completed an IBM-certified training covering HTML, CSS, JavaScript, responsive design, and industry best practices.",
-      badge: '../../src/assets/ibm.png',
+      badge: '/assets/ibm.png',
       link: 'https://skills.yourlearning.ibm.com/credential/CREDLY-ce744ad1-ca21-498e-a9ea-8c01f792977d'
     }
   ];
