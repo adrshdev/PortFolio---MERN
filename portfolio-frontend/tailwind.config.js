@@ -12,10 +12,14 @@ export default {
         'muted-foreground': '#94a3b8',
         primary: '#64ffda',
         accent: '#38bdf8',
+      },
+      scrollBehavior: {
+        smooth: 'smooth'
       }
-
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar-hide'),
+  ],
 }
 

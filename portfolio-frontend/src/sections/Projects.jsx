@@ -47,7 +47,7 @@ const Projects = () => {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <section id="projects" className="relative py-24 px-6 bg-gradient-to-br from-gray-950 via-black to-gray-900 text-white overflow-hidden">
+    <section id="projects" className="relative py-24 px-6 bg-gradient-to-br from-gray-950 via-black to-gray-900 text-white overflow-hidden will-change-transform">
 
       {/* Blurred background glow effects */}
       <div className="absolute top-0 left-0 w-80 h-80 bg-purple-700 rounded-full opacity-20 blur-3xl -z-10 animate-pulse" />
@@ -59,74 +59,43 @@ const Projects = () => {
         </h2>
 
         {/* Live Projects */}
-        <motion.div
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-10"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={{
-            visible: { transition: { staggerChildren: 0.15 } },
-            hidden: {},
-          }}
-        >
+       <div className="overflow-hidden">
+        <motion.div className='flex gap-6 snap-x snap-mandatory overflow-x-scroll scrollbar-hide px-2' drag='x' dragConstraints={{left: -1000, right: 0}} whileTap={{cursor: 'grabbing'}}>
           {projects.map((project, i) => (
-            <motion.div
-              key={i}
-              whileHover={{ scale: 1.03 }}
-              transition={{ type: 'spring', stiffness: 300 }}
-              variants={{
-                hidden: { opacity: 0, y: 30 },
-                visible: { opacity: 1, y: 0 },
-              }}
-              className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl backdrop-blur-md transition-all duration-300 group"
-            >
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <div className="p-6">
-                <h3 className="text-2xl font-bold mb-2 text-white">{project.title}</h3>
-                <p className="text-gray-400 text-sm mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-2 text-xs mb-4">
+            <motion.div key={i} initial={{opacity: 0, y: 30}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.6, delay: i * 0.1}} viewport={{once: true}} className='snap-start w-[300px] flex-shrink-0 bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl hover:shadow-cyan-500/30 transition-transform duration-300 transform-gpu hover:scale-[1.03] cursor-pointer group'>
+              <img src={project.image} alt={project.title} loading='lazy' className='w-full h-44 object-cover group-hover:scale-[1.02] transition-transform duration-200' />
+              <div className='p-5'>
+                <h3 className='text-xl font-bold text-white mb-2'>{project.title}</h3>
+                <p className='text-sm text-gray-400 mb-3'>{project.description}</p>
+                <div className='flex flex-wrap gap-2 text-xs mb-4'>
                   {project.stack.map((tech, j) => (
-                    <span
-                      key={j}
-                      className="bg-indigo-500/10 text-indigo-400 px-3 py-1 rounded-full"
-                    >
-                      {tech}
-                    </span>
+                    <span key={j} className='bg-indigo-500/10 text-indigo-300 px-3 py-1 rounded-full'>{tech}</span>
                   ))}
                 </div>
-                <div className="flex gap-4 text-sm font-medium text-indigo-400">
+                <div className='flex gap-4 text-sm font-medium text-cyan-300'>
                   {project.live ? (
-                    <a href={project.live} className="hover:underline flex items-center gap-1" target="_blank" rel="noopener noreferrer">
-                      <ExternalLink size={16} /> Live
-                    </a>
+                    <a href={project.live} className='hover:underline flex items-center gap-1' target='_blank' rel='noopener noreferrer'>Live <ExternalLink size={16}/></a>
                   ) : (
-                    <span className="text-gray-500 italic">Live Coming Soon</span>
+                    <span className='text-gray-500 italic'>Live Coming Soon</span>
                   )}
                   {project.code ? (
-                    <a href={project.code} className="hover:underline flex items-center gap-1" target="_blank" rel="noopener noreferrer">
-                      <ExternalLink size={16} /> Code
-                    </a>
+                    <a href={project.code} className='hover:underline flex items-center gap-1' target='_blank' rel='noopener noreferrer'>Code <ExternalLink size={16}/></a>
                   ) : (
-                    <span className="text-gray-500 italic">Code Private</span>
+                    <span className='text-gray-500 italic'>Code Private</span>
                   )}
                 </div>
               </div>
             </motion.div>
           ))}
         </motion.div>
-
+       </div>
         {/* Featured: Mendora */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.8 }}
           viewport={{ once: true }}
-          className="mt-28 bg-white/5 border border-white/10 rounded-2xl shadow-2xl p-8 flex flex-col lg:flex-row items-center gap-8 backdrop-blur-md"
-        >
+          className="mt-28 bg-white/5 border border-white/10 rounded-2xl shadow-2xl p-8 flex flex-col lg:flex-row items-center gap-8 tranform-gpu">
           <div className="flex-1">
             <h3 className="text-3xl md:text-4xl font-bold mb-4 text-white">Upcoming Milestone: Mendora</h3>
             <p className="text-gray-400 mb-3 text-base md:text-lg leading-relaxed">
@@ -145,6 +114,7 @@ const Projects = () => {
             <img
               src={mendora}
               alt="Mendora"
+              loading='lazy'
               className="rounded-xl w-64 lg:w-80 shadow-xl hover:scale-105 transition-transform duration-300"
             />
           </div>
@@ -157,7 +127,7 @@ const Projects = () => {
             {upcoming.map((item, i) => (
               <div
                 key={i}
-                className="bg-white/5 border border-white/10 text-white rounded-2xl p-6 shadow-md hover:shadow-xl transition backdrop-blur-md"
+                className="bg-white/5 border border-white/10 text-white rounded-2xl p-6 shadow-md hover:shadow-xl transition transform-gpu"
               >
                 <h4 className="text-2xl font-semibold mb-2">{item.title}</h4>
                 <p className="text-gray-400 mb-4 text-sm">{item.description}</p>
