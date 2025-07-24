@@ -1,6 +1,6 @@
 const about = {
   name: 'Adarsh Jayasanker',
-  image: '../../src/assets/f.jpg',
+  image: '/assets/f.jpg',
   description: 'I’m a passionate MERN Stack developer with a mission to build beautiful, functional, and user-centered web apps...',
   highlights: [
     'Over 10+ full-stack projects completed',
