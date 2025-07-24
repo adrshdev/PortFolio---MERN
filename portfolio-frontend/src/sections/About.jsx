@@ -1,5 +1,6 @@
 import about from '../data/about';
 import { motion } from 'framer-motion';
+import ProfileImage from '/assets/f.jpg';
 
 const About = () => {
   return (
@@ -18,7 +19,7 @@ const About = () => {
         >
           <div className="relative group">
             <img
-              src={about.name}
+              src={ProfileImage}
               alt={about.name}
               className="w-72 h-72 object-cover rounded-3xl border-4 border-white shadow-2xl transform group-hover:scale-105 transition duration-300"
             />
