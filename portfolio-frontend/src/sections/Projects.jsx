@@ -4,7 +4,7 @@ import mendora from '/assets/mendora.jpg';
 import weather from '/assets/weather.jpg';
 import chat from '/assets/chat.jpg';
 import greenx from '/assets/greenx.jpg';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const projects = [
   {
@@ -45,6 +45,17 @@ const upcoming = [
 const Projects = () => {
 
   const [showModal, setShowModal] = useState(false);
+  const [width, setWidth] = useState(0)
+  const carouselRef = useRef();
+
+  useEffect(() => {
+    if(carouselRef.current){
+      const scrollWidth = carouselRef.current.scrollWidth;
+      const offsetWidth = carouselRef.current.offsetWidth;
+      setWidth(scrollWidth - offsetWidth);
+    }
+  }, [projects]);
+
 
   return (
     <section id="projects" className="relative py-24 px-6 bg-gradient-to-br from-gray-950 via-black to-gray-900 text-white overflow-hidden will-change-transform">
@@ -59,35 +70,36 @@ const Projects = () => {
         </h2>
 
         {/* Live Projects */}
-       <div className="overflow-hidden">
-        <motion.div className='flex gap-6 snap-x snap-mandatory overflow-x-scroll scrollbar-hide px-2' drag='x' dragConstraints={{left: -1000, right: 0}} whileTap={{cursor: 'grabbing'}}>
-          {projects.map((project, i) => (
-            <motion.div key={i} initial={{opacity: 0, y: 30}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.6, delay: i * 0.1}} viewport={{once: true}} className='snap-start w-[300px] flex-shrink-0 bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl hover:shadow-cyan-500/30 transition-transform duration-300 transform-gpu hover:scale-[1.03] cursor-pointer group'>
-              <img src={project.image} alt={project.title} loading='lazy' className='w-full h-44 object-cover group-hover:scale-[1.02] transition-transform duration-200' />
-              <div className='p-5'>
-                <h3 className='text-xl font-bold text-white mb-2'>{project.title}</h3>
-                <p className='text-sm text-gray-400 mb-3'>{project.description}</p>
-                <div className='flex flex-wrap gap-2 text-xs mb-4'>
-                  {project.stack.map((tech, j) => (
-                    <span key={j} className='bg-indigo-500/10 text-indigo-300 px-3 py-1 rounded-full'>{tech}</span>
-                  ))}
+        <div className='overflow-hidden'>
+          <motion.div ref={carouselRef} className='flex gap-6 px-2 cursor-grab active:cursor-grabbing' drag='x' dragConstraints={{right: 0, left: -width}} whileTap={{cursor: 'grabbing'}}>
+            {projects.map((project, i) => (
+              <motion.div key={i} initial={{opacity: 0, y: 30}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.6, delay: i * 0.1}} viewport={{once: true}} className='w-[300px] flex-shrink-0 bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl hover:shadow-cyan-500/30 transition-transform duration-300 transform-gpu hover:scale-[1.03] cursor-pointer group'>
+                <img src={project.image} alt={project.title} loading='lazy' className='w-full h-44 object-cover group-hover:scale-[1.02] transition-transform duration-200' />
+                <div className='p-5'>
+                  <h3 className='text-xl font-bold text-white mb-2'>{project.title}</h3>
+                  <p className='text-sm text-gray-400 mb-3'>{project.description}</p>
+                  <div className="flex flex-wrap gap-2 text-xs mb-4">
+                    {project.stack.map((tech, j) => (
+                      <span key={j} className='bg-indigo-500/10 text-indigo-300 px-3 py-1 rounded-full'>{tech}</span>
+                    ))}
+                  </div>
+                  <div className='flex gap-4 text-sm font-medium text-cyan-300'>
+                    {project.live ? (
+                      <a href={project.live} className='hover:underline flex items-center gap-1' target='_blank' rel='noopener noreferrer'>Live <ExternalLink size={16}/></a>
+                    ) : (
+                      <span className='text-gray-500 italic'>Live Coming Soon</span>
+                    )}
+                    {project.code ? (
+                      <a href={project.code} className='hover:underline flex items-center gap-1' target='_blank' rel='noopener noreferrer'>Code <ExternalLink size={16}/></a>
+                    ) : (
+                      <span className='text-gray-500 italic'>Code Private</span>
+                    )}
+                  </div>
                 </div>
-                <div className='flex gap-4 text-sm font-medium text-cyan-300'>
-                  {project.live ? (
-                    <a href={project.live} className='hover:underline flex items-center gap-1' target='_blank' rel='noopener noreferrer'>Live <ExternalLink size={16}/></a>
-                  ) : (
-                    <span className='text-gray-500 italic'>Live Coming Soon</span>
-                  )}
-                  {project.code ? (
-                    <a href={project.code} className='hover:underline flex items-center gap-1' target='_blank' rel='noopener noreferrer'>Code <ExternalLink size={16}/></a>
-                  ) : (
-                    <span className='text-gray-500 italic'>Code Private</span>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
        </div>
         {/* Featured: Mendora */}
         <motion.div
@@ -146,7 +158,6 @@ const Projects = () => {
             ))}
           </div>
         </div>
-      </div>
       {showModal && (
   <motion.div className='fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4' initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
     <motion.div className='bg-gray-900 text-white max-w-2xl w-full rounded-2xl p-8 relative shadow-2xl border border-white/10 overflow-y-auto max-h-[90vh]' initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring', stiffness: 200 }}>
