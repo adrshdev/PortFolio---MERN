@@ -178,27 +178,84 @@ const Projects = () => {
         </div>
       </div>
       {showModal && (
-        <motion.div className='fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4' initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
-          <motion.div className='bg-gray-900 text-white max-w-2xl w-full rounded-2xl p-8 relative shadow-2xl border border-white/10' initial={{scale: 0.8, opacity: 0}} animate={{scale: 1, opacity: 1}} transition={{type: 'spring', stiffness: 200}}>
-            <button className='absolute top-4 right-4 text-gray-400 hover:text-white transition' onClick={() => setShowModal(false)} aria-label='close'>
-              <X size={24}/>
-            </button>
-            <h3 className='text-3xl font-bold mb-4 text-cyan-400'>Mendora: Our Vision</h3>
-            <p className='text-gray-300 mb-4 leading-relaxed text-sm'>
-              Mendora is not just another mental health app - It's a transformative eco-system designed to empower individuals globally with tools for emotional intelligence, healing, and growth.
-            </p>
-            <ul className='list-disc pl-5 space-y-2 text-sm text-gray-400 mb-6'>
-              <li>Anonymous Support Chat for people in emotional distress</li>
-              <li>AI-driven Mood Tracking with personalized wellness reports</li>
-              <li>Guided Meditation & Mindfulness sessions curated with experts</li>
-              <li>Private Journaling with GPT-assisted emotional reflection</li>
-              <li>Global community for peer support, stories & inspiration</li>
-              <li>Built with end-to-end privacy and data security by design</li>
-            </ul>
-            <p className='text-sm text-indigo-300 italic'>Our mission: Democratize mental wellness with tech and empathy. Mendora is for everyone.</p>
-          </motion.div>
-        </motion.div>
-      )}
+  <motion.div className='fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-4' initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+    <motion.div className='bg-gray-900 text-white max-w-2xl w-full rounded-2xl p-8 relative shadow-2xl border border-white/10 overflow-y-auto max-h-[90vh]' initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ type: 'spring', stiffness: 200 }}>
+      <button className='absolute top-4 right-4 text-gray-400 hover:text-white transition' onClick={() => setShowModal(false)} aria-label='close'>
+        <X size={24} />
+      </button>
+
+      <h3 className='text-3xl font-bold mb-4 text-cyan-400'>Mendora: Vision That Heals</h3>
+
+      <p className='text-sm text-gray-300 leading-relaxed mb-4'>
+        In a world accelerating toward noise, pressure, and endless comparison, <span className='text-white font-semibold'>Mendora</span> emerges with a revolutionary mission:
+      </p>
+
+      <p className='italic text-indigo-300 mb-4 text-sm'>
+        To bring every human being back to their original, untainted self — the state of clarity, peace, and conscious creation.
+      </p>
+
+      <p className='text-sm text-gray-400 leading-relaxed mb-4'>
+        Every human is born as a blank slate — a fresh consciousness. But as we grow, we’re shaped by society, trauma, family systems, and expectations. We become prisoners of subconscious programming.
+      </p>
+
+      <p className='text-sm text-gray-300 leading-relaxed mb-4'>
+        <strong className='text-cyan-300'>But what if we could return to our essence?</strong><br />
+        What if we could consciously reprogram our minds to create a reality aligned with peace, purpose, and self-realization?
+      </p>
+
+      <p className='text-sm text-gray-300 mb-6'>
+        <span className='font-semibold text-white'>That’s the soul of Mendora.</span><br />
+        Mendora is not just an app. It’s a Self-Exploration and Mental Transformation platform — a tech-powered ecosystem for anyone seeking to heal, understand themselves, and reshape their inner world.
+      </p>
+
+      <h4 className='text-lg font-semibold text-white mb-2'>🌱 What Mendora Offers</h4>
+      <ul className='list-disc pl-5 space-y-2 text-sm text-gray-400 mb-6'>
+        <li>Subconscious pattern recognition through AI & reflection tools</li>
+        <li>Deep healing of mental/emotional wounds using guided modalities</li>
+        <li>Mind reprogramming techniques grounded in neuroscience & psychology</li>
+        <li>Spiritual self-discovery paths to uncover the self beyond identity</li>
+        <li>A life creation model aligned with clarity, confidence, and peace</li>
+      </ul>
+
+      <h4 className='text-lg font-semibold text-white mb-2'>🚨 Why Now?</h4>
+      <p className='text-sm text-gray-400 mb-4'>
+        We’re in a global mental health emergency. Stress, anxiety, burnout — especially among youth — are at all-time highs. Yet current solutions are surface-level: quick motivation, shallow therapy, or passive meditation.
+      </p>
+      <p className='text-sm text-gray-300 mb-6'>
+        Mendora goes deeper. We target the <span className='text-white font-medium'>root of suffering: the subconscious identity.</span> We don’t just treat anxiety — we guide people to evolve beyond it.
+      </p>
+
+      <h4 className='text-lg font-semibold text-white mb-2'>🧠 Problem We're Solving</h4>
+      <ul className='list-disc pl-5 space-y-2 text-sm text-gray-400 mb-6'>
+        <li>Unresolved traumas buried in the subconscious</li>
+        <li>Cultural and generational programming limiting self-worth</li>
+        <li>False identity constructs shaped by external validation</li>
+        <li>Lack of true inner exploration in modern mental health tools</li>
+      </ul>
+
+      <p className='text-sm text-indigo-300 italic mb-4'>
+        Most apps offer calm. Mendora offers conscious transformation.
+      </p>
+
+      <h4 className='text-lg font-semibold text-white mb-2'>👤 Founder’s Perspective</h4>
+      <p className='text-sm text-gray-400 mb-4'>
+        In the natural world, nothing is rushed. No tree hurries to grow, no river panics, no animal stresses about tomorrow. Only humans suffer under a mind disconnected from its essence — molded by noise, trauma, and unchecked input.
+      </p>
+      <p className='text-sm text-gray-300 mb-6'>
+        Mendora is not here to relieve temporary pain. It’s here to guide people back to their true self — through science-backed, spiritually-aligned self-reprogramming.
+      </p>
+
+      <blockquote className='border-l-4 border-cyan-500 pl-4 text-cyan-300 italic text-sm mb-6'>
+        “Who are you, when you're not what the world told you to be?”
+      </blockquote>
+
+      <p className='text-sm text-teal-300 font-medium'>
+        Our mission is nothing short of a consciousness revolution.
+      </p>
+    </motion.div>
+  </motion.div>
+)}
+
     </section>
   );
 };
