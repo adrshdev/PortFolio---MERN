@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { ExternalLink, X } from 'lucide-react';
 import mendora from '/assets/mendora.jpg';
 import weather from '/assets/weather.jpg';
