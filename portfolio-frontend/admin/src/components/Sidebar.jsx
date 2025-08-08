@@ -11,7 +11,7 @@ const Sidebar = () => {
         <Link to={'/projectmanagement'} className='flex items-center gap-3 hover:text-accent'><FolderKanban size={18}/>Project Management</Link>
       </nav>
       <div className='mt-auto pt-6 border-t border-white/10'>
-        <button className='flex items-center gap-3 text-red-400 hover:text-red-300'><LogOut size={18}/>Logout</button>
+        <Link to={'/auth'}><button className='flex items-center gap-3 text-red-400 hover:text-red-300'><LogOut size={18}/>Logout</button></Link>
       </div>
     </aside>
   )

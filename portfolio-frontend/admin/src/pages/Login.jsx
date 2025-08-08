@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   return (
@@ -17,7 +18,7 @@ const Login = () => {
               <button type='button' className='absolute right-3 top-1/2 -translate-y-1/2 text-sm text-accent hover:underline'>Show Password</button>
             </div>
           </div>
-          <button type='submit' className='w-full bg-accent hover:bg-cyan-400 text-background font-semibold py-2 rounded-lg transition duration-200'>Login</button>
+          <Link to={'/'}><button type='submit' className='w-full bg-accent hover:bg-cyan-400 text-background font-semibold py-2 rounded-lg transition duration-200 mt-3'>Login</button></Link>
         </form>
       </div>
     </div>

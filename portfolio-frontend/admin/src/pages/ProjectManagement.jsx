@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {PlusCircle, Pencil, Trash, ExternalLink, Github} from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import portfolioCoverImage from '../assets/images/glen-carrie-TfzeRFtlkFA-unsplash.jpg';
+import AddProjectModal from '../components/AddProjectModal';
 
 const ProjectManagement = () => {
+
+  const [clickAddProject, setClickAddProject] = useState(false);
+
   return (
-    <div className='flex bg-background min-h-screen text-foreground'>
+    <div className='relative'>
+      <div className='flex bg-background min-h-screen text-foreground'>
       <Sidebar/>
       <div className='flex-1 p-6'>
         <header className='flex items-center justify-between mb-6'>
           <h2 className='text-2xl font-semibold'>Manage Projects</h2>
-          <button className='flex items-center gap-2 text-primary font-medium hover:underline'><PlusCircle/>Add New Project</button>
+          <button className='flex items-center gap-2 text-primary font-medium hover:underline' onClick={() => setClickAddProject(prev => !prev)}><PlusCircle/>Add New Project</button>
         </header>
         <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-5'>
           <div className='bg-muted rounded-xl overflow-hidden shadow-md hover:shadow-lg transition'>
@@ -107,6 +112,15 @@ const ProjectManagement = () => {
 
         </div>
       </div>
+    </div>
+    {clickAddProject && (
+      <div className='fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4'>
+        <div className='relative bg-muted rounded-xl max-w-2xl w-full p-6 shadow-lg'>
+          <button onClick={() => setClickAddProject(false)} className='absolute top-4 right-4 text-muted-foreground hover:text-white'>X</button>
+          <AddProjectModal/>
+        </div>
+      </div>
+    )}
     </div>
   )
 }

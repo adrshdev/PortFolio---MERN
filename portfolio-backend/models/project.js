@@ -1,32 +1,47 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const projectSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    required: true,
-    trim: true,
+const projectSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: [true, 'Project title is required'],
+      trim: true,
+    },
+    description: {
+      type: String,
+      required: [true, 'Project description is required'],
+    },
+    technologies: {
+      type: [String],
+      required: [true, 'Technologies used are required'],
+    },
+    liveUrl: {
+      type: String,
+      validate: {
+        validator: function(v) {
+          return !v || /^https?:\/\/.+/.test(v);
+        },
+        message: 'Live URL must be a valid URL',
+      }
+    },
+    repoUrl: {
+      type: String,
+      validate: {
+        validator: function(v) {
+          return !v || /^https?:\/\/.+/.test(v);
+        },
+        message: 'Repository URL must be a valid URL',
+      },
+    },
+    coverImage: {
+      type: String,
+      required: [true, 'Cover Image is required'],
+    },
   },
-  description: {
-    type: String,
-    required: true,
-    trim: true,
+  {
+    timestamps: true,
   },
-  image: {
-    type: String,
-    required: true,
-  },
-  techstack: {
-    type: [String],
-    required: true,
-  },
-  liveLink: {
-    type: String,
-    trim: true,
-  },
-  sourceCode: {
-    type: String,
-    trim: true,
-  },
-}, {timestamps: true});
+);
 
-module.exports = mongoose.model('Project', projectSchema);
+const Project = mongoose.model('Project', projectSchema);
+module.exports = Project;
