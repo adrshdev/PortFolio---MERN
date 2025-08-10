@@ -7,88 +7,53 @@ const techOptions = [
   'Socket.io', 'Realtime', 'MERN', 'EJS', 'OpenAI', 'career',
 ];
 
-const AddProjectModal = ({onProjectAdded}) => {
+const AddUpcomingProjectModal = ({onProjectAdded}) => {
 
-  const [previewImage, setPreviewImage] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
   const [form, setForm] = useState({
     title: '',
     description: '',
     technologies: [],
-    liveUrl: '',
-    repoUrl: '',
-    coverImage: '',
   });
-  const [successMessage, setSuccessMessage] = useState('')
- 
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if(file) {
-      setForm((prev) => ({
-        ...prev,
-        coverImage: file
-      }));
-      const previewUrl = URL.createObjectURL(file);
-      setPreviewImage(previewUrl);
-    }
-  }
+  const [isOpen, setIsOpen] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
   const toggleDropdown = () => {
-    setIsOpen((prev) => !prev)
+    setIsOpen(prev => !prev);
   }
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    })
+  };
 
   const handleTechChange = (e) => {
     const {value, checked} = e.target;
     setForm((prev) => {
-      const updatedTechs = checked ? [...prev.technologies, value] : prev.technologies.filter((tech) => tech !== value);
+      const updatedTech = checked ? [...prev.technologies, value] : prev.technologies.filter((tech) => tech!==value);
       return{
         ...prev,
-        technologies: updatedTechs,
-      }
-    })
+        technologies: updatedTech,
+      };
+    });
   };
 
-  const handleChange = (e) => {
-    setForm({...form, [e.target.name]: e.target.value});
-  }
-
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try{
-      const formData = new FormData();
-      formData.append('title', form.title);
-      formData.append('description', form.description);
-      formData.append('liveUrl', form.liveUrl);
-      formData.append('repoUrl', form.repoUrl);
-      form.technologies.forEach((tech) => {
-        formData.append("technologies[]", tech);
-      });
-      if(form.coverImage){
-        formData.append('coverImage', form.coverImage);
-      };
-      const response = await Api.post('/admin/createproject', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        }
-      });
-      if(response.data?.success) {
+      const response = await Api.post('/admin/addupcomingproject', {form});
+      if(response.data?.success){
         setForm({
           title: '',
           description: '',
           technologies: [],
-          liveUrl: '',
-          repoUrl: '',
-          coverImage: ''
         });
-        setPreviewImage('');
-        setSuccessMessage('Project added successfully.');
-        if(onProjectAdded){
-          onProjectAdded();
-        }
+        onProjectAdded();
+        setSuccessMessage('Project Added');
       }
     }catch(error){
-      console.error(error);
+      console.error(error)
     }
   }
 
@@ -134,21 +99,6 @@ const AddProjectModal = ({onProjectAdded}) => {
           </div>
         )}
       </div>
-      <div className='space-y-1'>
-        <label className='block font-medium text-white'>Live URL</label>
-        <input type="url" name='liveUrl' value={form.liveUrl} onChange={handleChange} className='w-full bg-background p-2 rounded border border-muted-foreground/30 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent' />
-      </div>
-      <div className='space-y-1'>
-        <label className='block font-medium text-white'>GitHub Repo URL</label>
-        <input type="url" name='repoUrl' value={form.repoUrl} onChange={handleChange} className='w-full bg-background rounded border border-muted-foreground/30 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-accent' />
-      </div>
-      <div className='space-y-1'>
-        <label className='block font-medium text-white'>Cover Image *</label>
-        <input type="file" accept='image/*' name='coverImage' onChange={handleImageChange} className='text-muted-foreground file:bg-accent file:border-none file:rounded file:px-3 file:py-1 file:text-white file:cursor-pointer' required />
-        {previewImage && (
-          <img src={previewImage} alt="Preview" className='mt-2 h-32 w-full object-cover rounded' />
-        )}
-      </div>
       {successMessage && (
         <p>{successMessage}</p>
       )}
@@ -158,4 +108,4 @@ const AddProjectModal = ({onProjectAdded}) => {
   )
 }
 
-export default AddProjectModal
+export default AddUpcomingProjectModal

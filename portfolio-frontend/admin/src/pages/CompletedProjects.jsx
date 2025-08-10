@@ -25,15 +25,10 @@ const CompletedProjects = () => {
   useEffect(() => {
     fetchAllProjects();
   }, []);
-
-  console.log(projects);
   
 
   return (
     <div className='relative'>
-      <div className='flex bg-background min-h-screen text-foreground'>
-      <Sidebar/>
-      <div className='flex-1 p-6'>
         <header className='flex items-center justify-between mb-6'>
           <h2 className='text-2xl font-semibold'>Manage Projects</h2>
           <button className='flex items-center gap-2 text-primary font-medium hover:underline' onClick={() => setClickAddProject(prev => !prev)}><PlusCircle/>Add New Project</button>
@@ -55,8 +50,8 @@ const CompletedProjects = () => {
               </div>
               <div className='flex flex-wrap gap-2 text-sm'>
                 {project.technologies?.length > 0 && (
-                  project.technologies.map((tech) => (
-                    <span className='bg-background border border-muted-foreground/20 text-muted-foreground px-2 py-1 rounded'>{tech}</span>
+                  project.technologies.map((tech, index) => (
+                    <span key={index} className='bg-background border border-muted-foreground/20 text-muted-foreground px-2 py-1 rounded'>{tech}</span>
                   ))
                 )}
               </div>
@@ -68,16 +63,15 @@ const CompletedProjects = () => {
           </div>
           ))}
         </div>
-      </div>
-    </div>
-    {clickAddProject && (
-      <div className='fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4'>
-        <div className='relative bg-muted rounded-xl max-w-2xl w-full p-6 shadow-lg'>
-          <button onClick={() => setClickAddProject(false)} className='absolute top-4 right-4 text-muted-foreground hover:text-white'>X</button>
-          <AddProjectModal onProjectAdded = {fetchAllProjects}/>
+    
+      {clickAddProject && (
+        <div className='fixed inset-0 bg-black/60 z-50 flex items-center justify-center px-4'>
+          <div className='relative bg-muted rounded-xl max-w-2xl w-full p-6 shadow-lg'>
+            <button onClick={() => setClickAddProject(false)} className='absolute top-4 right-4 text-muted-foreground hover:text-white'>X</button>
+            <AddProjectModal onProjectAdded = {fetchAllProjects}/>
+          </div>
         </div>
-      </div>
-    )}
+      )}
     </div>
   )
 }
