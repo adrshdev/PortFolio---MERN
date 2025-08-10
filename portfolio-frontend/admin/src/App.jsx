@@ -1,8 +1,9 @@
 import React from 'react'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
-import ProjectManagement from './pages/ProjectManagement'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import CompletedProjects from './pages/CompletedProjects';
+import UpcomingProjects from './pages/UpcomingProjects';
 
 const App = () => {
   return (
@@ -10,7 +11,8 @@ const App = () => {
       <Routes>
         <Route path='/auth' element={<Login/>}/>
         <Route path='/' element={<Dashboard/>}/>
-        <Route path='/projectmanagement' element={<ProjectManagement/>}/>
+        <Route path='/completedprojects' element={<CompletedProjects/>}/>
+        <Route path='/upcomingprojects' element={<UpcomingProjects/>}/>
       </Routes>
     </Router>
   )
