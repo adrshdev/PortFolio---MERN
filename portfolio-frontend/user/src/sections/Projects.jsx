@@ -75,13 +75,13 @@ const Projects = () => {
                     ))}
                   </div>
                   <div className='flex gap-4 text-sm font-medium text-cyan-300'>
-                    {project.live ? (
-                      <a href={project.live} className='hover:underline flex items-center gap-1' target='_blank' rel='noopener noreferrer'>Live <ExternalLink size={16}/></a>
+                    {project.liveUrl ? (
+                      <a href={project.liveUrl} className='hover:underline flex items-center gap-1' target='_blank' rel='noopener noreferrer'>Live <ExternalLink size={16}/></a>
                     ) : (
                       <span className='text-gray-500 italic'>Live Coming Soon</span>
                     )}
-                    {project.code ? (
-                      <a href={project.code} className='hover:underline flex items-center gap-1' target='_blank' rel='noopener noreferrer'>Code <ExternalLink size={16}/></a>
+                    {project.repoUrl ? (
+                      <a href={project.repoUrl} className='hover:underline flex items-center gap-1' target='_blank' rel='noopener noreferrer'>Code <ExternalLink size={16}/></a>
                     ) : (
                       <span className='text-gray-500 italic'>Code Private</span>
                     )}
