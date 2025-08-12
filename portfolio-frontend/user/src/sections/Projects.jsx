@@ -65,7 +65,7 @@ const Projects = () => {
             {projects.length > 0 ? (
               projects.map((project, i) => (
               <motion.div key={i} initial={{opacity: 0, y: 30}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.6, delay: i * 0.1}} viewport={{once: true}} className='w-[300px] flex-shrink-0 bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl hover:shadow-cyan-500/30 transition-transform duration-300 transform-gpu hover:scale-[1.03] cursor-pointer group'>
-                <img src={`http://localhost:5000${project.coverImage}`} alt={project.title} loading='lazy' className='w-full h-44 object-cover group-hover:scale-[1.02] transition-transform duration-200' />
+                <img src={`https://portfolio-mern-1-s1oo.onrender.com${project.coverImage}`} alt={project.title} loading='lazy' className='w-full h-44 object-cover group-hover:scale-[1.02] transition-transform duration-200' />
                 <div className='p-5'>
                   <h3 className='text-xl font-bold text-white mb-2'>{project.title}</h3>
                   <p className='text-sm text-gray-400 mb-3'>{project.description}</p>
