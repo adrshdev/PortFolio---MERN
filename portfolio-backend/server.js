@@ -3,6 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const adminRouter = require('./routes/adminRoutes');
 const path = require('path');
+const userRouter = require('./routes/userRoutes');
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(cors({
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/admin', adminRouter);
+app.use('/', userRouter);
 
 
 mongoose.connect('mongodb+srv://adarshjayasankerdev:portfolio@cluster0.cbbqzjt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')

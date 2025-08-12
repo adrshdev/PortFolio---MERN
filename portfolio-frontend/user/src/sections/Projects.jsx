@@ -1,52 +1,34 @@
 import { motion } from 'framer-motion';
 import { ExternalLink, X } from 'lucide-react';
 import mendora from '/assets/mendora.jpg';
-import weather from '/assets/weather.jpg';
-import chat from '/assets/chat.jpg';
-import greenx from '/assets/greenx.jpg';
 import { useEffect, useRef, useState } from 'react';
-
-const projects = [
-  {
-    title: 'SkyCast',
-    description: 'A cartoon-styled weather app using OpenWeather API, built with React and TailwindCSS.',
-    image: weather,
-    stack: ['React', 'Tailwind', 'API'],
-    live: '',
-    code: '',
-  },
-  {
-    title: 'TalkBit',
-    description: 'A real-time chat app built with MERN stack & Socket.io featuring user auth and chat persistence.',
-    image: chat,
-    stack: ['MERN', 'Socket.io', 'Realtime'],
-    live: '',
-    code: '',
-  },
-  {
-    title: 'GreenX Pest Control & Bird Netting',
-    description: 'A full-stack site built with EJS, Express, and MongoDB for backend CMS and user contact integration.',
-    image: greenx,
-    stack: ['EJS', 'Express', 'MongoDB'],
-    live: 'https://www.greenxpcs.com',
-    code: '',
-  },
-];
-
-const upcoming = [
-  {
-    title: 'WorkForge - AI Job Skills Dashboard',
-    description: 'AI-powered dashboard for developers to map skills, get roadmaps, save jobs, and get OpenAI career insights.',
-    stack: ['MERN', 'OpenAI', 'Career'],
-    status: 'Planning in progress...',
-  },
-];
+import Api from '../Api';
 
 const Projects = () => {
 
   const [showModal, setShowModal] = useState(false);
-  const [width, setWidth] = useState(0)
+  const [width, setWidth] = useState(0);
+  const [projects, setProjects] = useState([]);
+  const [upcomingProjects, setUpcomingProjects] = useState([]);
   const carouselRef = useRef();
+
+  const fetchCompletedProjects = async () => {
+    try{
+      const response = await Api.get('/fetchallprojects');
+      setProjects(response.data.projects)
+    }catch(error){
+      console.error(error);
+    }
+  }
+
+  const fetchAllUpcomingProjects = async() => {
+    try{
+      const response = await Api.get('/fetchallupcomingprojects');
+      setUpcomingProjects(response.data.upcomingProjects)
+    }catch(error){
+      console.error(error);
+    }
+  }
 
   useEffect(() => {
     if(carouselRef.current){
@@ -56,6 +38,14 @@ const Projects = () => {
     }
   }, [projects]);
 
+  useEffect(() => {
+    fetchCompletedProjects();
+    fetchAllUpcomingProjects();
+  }, []);
+
+  console.log(upcomingProjects);
+  
+  
 
   return (
     <section id="projects" className="relative py-24 px-6 bg-gradient-to-br from-gray-950 via-black to-gray-900 text-white overflow-hidden will-change-transform">
@@ -72,14 +62,15 @@ const Projects = () => {
         {/* Live Projects */}
         <div className='overflow-hidden'>
           <motion.div ref={carouselRef} className='flex gap-6 px-2 cursor-grab active:cursor-grabbing' drag='x' dragConstraints={{right: 0, left: -width}} whileTap={{cursor: 'grabbing'}}>
-            {projects.map((project, i) => (
+            {projects.length > 0 ? (
+              projects.map((project, i) => (
               <motion.div key={i} initial={{opacity: 0, y: 30}} whileInView={{opacity: 1, y: 0}} transition={{duration: 0.6, delay: i * 0.1}} viewport={{once: true}} className='w-[300px] flex-shrink-0 bg-white/5 border border-white/10 backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl hover:shadow-cyan-500/30 transition-transform duration-300 transform-gpu hover:scale-[1.03] cursor-pointer group'>
-                <img src={project.image} alt={project.title} loading='lazy' className='w-full h-44 object-cover group-hover:scale-[1.02] transition-transform duration-200' />
+                <img src={`http://localhost:5000${project.coverImage}`} alt={project.title} loading='lazy' className='w-full h-44 object-cover group-hover:scale-[1.02] transition-transform duration-200' />
                 <div className='p-5'>
                   <h3 className='text-xl font-bold text-white mb-2'>{project.title}</h3>
                   <p className='text-sm text-gray-400 mb-3'>{project.description}</p>
                   <div className="flex flex-wrap gap-2 text-xs mb-4">
-                    {project.stack.map((tech, j) => (
+                    {project.stack?.map((tech, j) => (
                       <span key={j} className='bg-indigo-500/10 text-indigo-300 px-3 py-1 rounded-full'>{tech}</span>
                     ))}
                   </div>
@@ -97,7 +88,10 @@ const Projects = () => {
                   </div>
                 </div>
               </motion.div>
-            ))}
+            ))
+            ) : (
+              <p>Loading</p>
+            )}
           </motion.div>
         </div>
        </div>
@@ -136,26 +130,27 @@ const Projects = () => {
         <div className="mt-28">
           <h3 className="text-3xl font-bold mb-10 text-center text-white">Upcoming Projects</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {upcoming.map((item, i) => (
-              <div
-                key={i}
-                className="bg-white/5 border border-white/10 text-white rounded-2xl p-6 shadow-md hover:shadow-xl transition transform-gpu"
-              >
+            {upcomingProjects.length > 0 ? (
+              upcomingProjects.map((item, i) => (
+              <div key={i} className="bg-white/5 border border-white/10 text-white rounded-2xl p-6 shadow-md hover:shadow-xl transition transform-gpu">
                 <h4 className="text-2xl font-semibold mb-2">{item.title}</h4>
                 <p className="text-gray-400 mb-4 text-sm">{item.description}</p>
                 <div className="flex flex-wrap gap-2 text-xs mb-3">
-                  {item.stack.map((tag, j) => (
+                  {item.technologies?.map((tech, j) => (
                     <span
                       key={j}
                       className="bg-indigo-500/10 text-indigo-400 px-3 py-1 rounded-full"
                     >
-                      {tag}
+                      {tech}
                     </span>
                   ))}
                 </div>
                 <p className="text-indigo-300 italic text-sm">{item.status}</p>
               </div>
-            ))}
+            ))
+            ) : (
+              <p>Loading...</p>
+            )}
           </div>
         </div>
       {showModal && (
