@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const Api = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: ' https://portfolio-mern-2-d3j1.onrender.com',
   withCredentials: true,
 });
 
