@@ -1,6 +1,6 @@
 import about from '../data/about';
 import { motion } from 'framer-motion';
-import ProfileImage from '/assets/f.jpg';
+import ProfileImage from '/assets/Portfolio Picture.jpg';
 
 const About = () => {
   return (
